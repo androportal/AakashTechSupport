@@ -76,6 +76,7 @@ MEDIA_URL = '/media/'
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATIC_ROOT = ''
 
 # URL prefix for static files.

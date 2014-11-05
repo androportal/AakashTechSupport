@@ -12,7 +12,7 @@ Clone
 - Make sure your Internet is working.
 - Clone this repo by typing ::
 
-    git clone https://github.com/darkdefender27/AakashTechSupport.git
+    git clone https://github.com/androportal/AakashTechSupport.git
 
 
 Installation
