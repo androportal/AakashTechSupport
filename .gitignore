@@ -1,11 +1,10 @@
 # ignored files for AakashTechSupport
 
 *.db
-
 *.tex
 *.sty
 *.pyc
-
 store.py
 cl.py
-
+*~
+*.swp

@@ -1,2 +1,8 @@
 Django==1.6.5
-django-chartit
+MySQL-python==1.2.5
+Pillow==2.6.1
+South==1.0.1
+django-chartit==0.1
+django-taggit==0.12.2
+django-tinymce==1.5.3
+django-wysiwyg==0.7.0
