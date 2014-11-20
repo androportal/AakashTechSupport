@@ -1,8 +1,8 @@
-=================
-AakashTechSupport
-=================
+=======================
+Low Cost Linux Netbbok
+======================
 
-A **WebApp** to provide online *Technical Support* to the people using Aakash tablets.
+A **WebApp** to provide online *Technical Support* to the people using Netbook.
 
 (Summer Internship 2014, Indian Institute of Technology, Bombay)
 
@@ -36,26 +36,29 @@ Installation
 
 - Install pre-requisites using the command ::
 
-    pip install -r requirement.txt
+    pip install -r Requirement.txt
 
   or you can also type ::
 
-    easy_install `cat requirement.txt`
+    easy_install `cat Requirement.txt`
 
 
 Usage
 -----
 
-- Using sqlite3 (For development server only). Though, we recommend to use `MySQL` for deployment
+- Using mysql (For development server only). Though, we recommend to use `mysql` for deployment
   server. See `settings.py` file for usage.
+
+- Create 'techsupport' database in 'MySQL'.
 
   Open `AakashTechSupport/AakashTechSupport/settings.py` file and do the following changes ::
 
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backend.sqlite3',
-        'NAME'  : 'techsupport.db',
-        #No need to mention below fields while using sqlite3
+        'ENGINE': 'django.db.backend.mysql',
+        'NAME'  : 'techsupport',
+        # user and password is provide `AakashTechSupport/AakashTechSupport/top_secret.py` file.
+        # for server deployment it will be blank 
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -63,7 +66,12 @@ Usage
         }
     }
 
+- For development on localhost open `AakashTechSupport/AakashTechSupport/wsgi.py` file and do following changes.
 
+	sys.path.append('/home/path/to/AakashTechSupport')
+	
+	activate_this = '/home/path/to/bin/activate_this.py'
+	
 - Populate the database using the following command ::
 
     cd /path/to/AakashTechSupport

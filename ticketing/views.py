@@ -47,10 +47,12 @@ def submit_ticket(request):
             user_details = request.user.email
             submit_ticket_form = SubmitTicketForm(
                 request.POST, user_details=user_details)#instantiating the SubmitTicketForm; passing the POST request and users email as a parameter
+            '''
             print request.POST["topic_id"]
             category = Category.objects.get(category=str(request.POST["topic_id"]))#getting the category object from the Category table corresponding to the category selected from the drop down by the user
             cat_id = category.id
             submit_ticket_form.topic_id = cat_id
+            '''
             if submit_ticket_form.is_valid():
                 t=datetime.datetime.now()
 		t=t.strftime('%Y-%m-%d %H:%M:%S')
@@ -91,6 +93,8 @@ You can view this ticket's progress online by logging into your account and clic
 		#this handles the ValidationError raised in forms.py if the user enters a tablet id that is not present in the Tablet_info table
                 user_details = request.user.email #get the users email
                 submit_ticket_form = SubmitTicketForm(user_details=user_details) #instantiate the form
+                print "submit_ticket_form"
+                print submit_ticket_form
                 content = {
                     'submit_ticket_form': submit_ticket_form,
                     'user': request.user,

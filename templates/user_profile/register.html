@@ -55,7 +55,7 @@
 	
 		<div class="page-header">
 		  <a href="/" title="Go back to Home Page">
-            <img src = "{% static 'images/aakash.png' %}" alt="Aakash Logo-small" height="50px" width="100px" />
+            <img src = "{% static 'images/netbook.png' %}" alt="Aakash Logo-small" height="50px" width="100px" />
 		  </a>
 
 		  <h1 style="font-family: Whitney SSm A,Whitney SSm B,verdana,Lucida Grande,sans-serif;"><small>Register to </small><strong>TechSupport</strong></h1>
@@ -87,6 +87,7 @@
 			  	</div>
 			  	<br/>
                 -->
+                		
 	   			<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 					<input type="text" class="form-control" name="username" placeholder="Username" required="required" />
@@ -104,15 +105,18 @@
 					<input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required" />
 			  	</div>
 			  	<br/>
-
-            <div class="form-group">
-                <div class="input-group">
+			  	<!--<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+					<input type="text" class="form-control" name="netbook_serial_no" placeholder="Your Netbook Serial No" required="required" />
+			  	</div>-->
+			  	
+                		<div class="input-group">
 						<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-						<input type="email" class="form-control" name ="email" placeholder="Your Email-Id" required="required" data-title="Please use a valid email-id" data-require="" data-regex="email"/>
-                </div>
-            </div>
-
-	   			<div class="input-group">
+						<input type="email" class="form-control" name ="email" placeholder="Your Email-Id" 							required="required" data-title="Please use a valid email-id" data-require="" data-regex="email"/>
+                		</div>
+            			
+			  	<br/>
+			  	<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 					<input type="password" class="form-control" name="password" placeholder="Password" required="required" />
 			  	</div>
@@ -124,24 +128,37 @@
 			  	</div>
 			  	<br/>
 
+            
+     <!-- <div class="form-group">
+       
+       <div class="input-group date" id="datetimePicker">
+       		<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input type="text" class="form-control" name="meeting" placeholder="MM/DD/YYYY h:m A" />
+                
+            </div>
+    </div>-->
+    </br>
+
+	   			
+
 			    <!-- ERRORS, IF ANY IN POSTFORM -->
 			    
 				{% if er1 or er2 or postform.errors%}
 				<div class="alert alert-danger">
 				{% for i in postform.errors %}
-				<p>
-                    {% if i == "username" %}
-                        Username should be alphanumeric & of min_length 3
-                    {% endif %}
+					<p>
+					    {% if i == "username" %}
+						Username should be alphanumeric
+					    {% endif %}
 
-                    {% if i == "first_name" %}
-                        First name should consist of alphabets
-                    {% endif %}
+					    {% if i == "first_name" %}
+						First name should consist of alphabets
+					    {% endif %}
 
-                    {% if i == "last_name" %}
-                        Last name should consist of alphabets
-                    {% endif %}
-                </p>
+					    {% if i == "last_name" %}
+						Last name should consist of alphabets
+					    {% endif %}
+		        		</p>
 				{% endfor %}
 				
 				{% if er1 %}

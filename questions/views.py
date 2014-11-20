@@ -81,6 +81,8 @@ def ask_question(request):
         title = request.POST['post_title']
         body = request.POST['post_text']
         category_selected = request.POST['category']
+        print "get selected categories"
+        print category_selected
         post_date = datetime.datetime.now()
         u = User.objects.get(username=request.user.username)
         some_user = UserProfile.objects.get(user=u)
@@ -115,6 +117,9 @@ def ask_question(request):
         if request.user.is_authenticated():
             user = request.user
             categories = Category.objects.all()
+            print "categories"
+            print categories
+            
             c = {
                 'user': user,
                 'catg': categories

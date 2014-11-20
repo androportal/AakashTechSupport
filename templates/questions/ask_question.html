@@ -43,10 +43,14 @@
             </td>
 
             <td>
+            	
                 <select class="form-control" name="category" style="width: 610px;">
-                  {% for i in catg %}
+                  
+                 {% for i in catg %}
                   <option>{{ i.category|lower|capfirst }}</option>
                   {% endfor %}
+                  <!--<option>Software</option>
+                  <option>Hardware</option>-->
                 </select>
             </td>
         </tr>

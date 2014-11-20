@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<title>
-		  	Aakash Tech
+		  	Low Cost Linux Netbook
 		</title>
 		
 		<link rel="stylesheet" href="{% static 'css/custom.css' %}" />
@@ -41,7 +41,7 @@
 		  </button>
 
 		  <a href="/">
-              <img src = "{% static 'images/aakash-logo-new.png' %}" alt="Aakash Logo"/>
+              <img src = "{% static 'images/netbook-logo.png' %}" alt="Netbook Logo"/>
 		  </a>
 		</div>
 
@@ -140,7 +140,7 @@
         </ul>
 
         <ul class="nav navbar-nav">
-           <a class="navbar-brand " href="/questions/tags/"><b>Tags</b>&nbsp;&nbsp;&nbsp; |</a>
+           <a class="navbar-brand " href="/questions/tags/"><b>Tags</b>&nbsp;&nbsp;&nbsp; </a>
         </ul>
 
 	<ul class="nav navbar-nav">
@@ -154,18 +154,15 @@
 		</ul>
 	</li>
 
-        {% else %}
-	<a class="navbar-brand " href="/ticketing/submit_ticket/" ><b>Submit Ticket</b></a>
 	{% endif %}
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
               {% if not user.is_superuser %}
-                  <a class="navbar-brand " href="/ticketing/view_tickets/" >View <b>Tickets </b>&nbsp;&nbsp; |</a>
+                 
                   <a class="navbar-brand " href="/questions/askquestion/" >Ask <b>Question </b></a>
-              {% else %}
-              <a class="navbar-brand " href="/ticketing/view_tickets/" >View <b>Tickets </b></a>
+              
               {% endif %}
 
           {% else %}
@@ -238,7 +235,7 @@
             </div>
             -->
             <div class="sidebar-image" style="float: right;">
-                <img src="{% static 'images/tablets_tech_support.png' %}" width="400px" height="350px" />
+                <img src="{% static 'images/netbook-tech-support.png' %}" width="300px" height="250px" />
             </div>
 
             <h2 style="font-family:  Whitney SSm A,Whitney SSm B,verdana,Lucida Grande,sans-serif;">
@@ -254,7 +251,7 @@
                     <p>No relevant questions exists? Why not <b>register</b> to our website and ask one yourself.</p>
                 </li>
                 <li>
-                    <p>Not satisifed yet! <b>Submit a ticket</b> to our <b>TechSupport</b> team</p>
+                    <p>Not satisifed yet! <b>Ask Question</b> to our <b>TechSupport</b> team</p>
                 </li>
             </ul>
 
@@ -296,7 +293,7 @@
               </div>
 		  <div class="container">
 			<center>
-				<p class="muted credit">Development on <a target="_blank" href="http://www.aakashlabs.org"> Aakash Labs</a> under construction.
+				<p class="muted credit">Development on <a target="_blank" href="http://www.aakashlabs.org"> Netbooks </a> under construction.
 				 &nbsp; |  &nbsp;
 			   	Copyright <a href="http://www.iitb.ac.in" target="_blank"> © IIT Bombay</a>  Inc.
 				 &nbsp; |  &nbsp;

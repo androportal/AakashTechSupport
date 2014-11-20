@@ -18,21 +18,25 @@ class SubmitTicketForm(forms.ModelForm):
 			    widget=forms.TextInput(
 				    attrs={'class': 'form-control', 'placeholder': 'Tablet Id'}),
 			    )
-    topic_id = forms.ChoiceField(
+    '''topic_id = forms.ChoiceField(
 			    choices=[(x['category'], str(x['category'])) for x in Category.objects.values('category')],
 			    help_text="Enter Help Topic:",
 			    #label="Select Help Topic",
 			    widget=forms.Select(
 				    attrs={'class': 'form-control', 'placeholder': 'Help topic'}),
-			    )#topic_id will display a html select element in the rendered html so that the user can select his problems category
+			    )#topic_id will display a html select element in the rendered html so that the user can select his problems category'''
     message = forms.CharField(max_length=500,
 			      help_text="Message :",
 			      label="Message",
 			      widget=forms.Textarea(attrs={'class': 'form-control'})
                              )#a textarea is displayed in the rendered html
+    '''class Meta:
+        model = Ticket
+        fields = ('tab_id', 'user_id', 'topic_id', 'message')'''
+        
     class Meta:
         model = Ticket
-        fields = ('tab_id', 'user_id', 'topic_id', 'message')
+        fields = ('tab_id', 'user_id', 'message')
 
     def clean_topic_id(self):
         category = Category.objects.get(category=self.cleaned_data['topic_id'])

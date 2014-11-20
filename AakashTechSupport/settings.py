@@ -26,6 +26,7 @@ DATABASES = {
         'NAME': 'techsupport',
         'USER': top_secret.db_user,
         'PASSWORD': top_secret.db_pass,
+        
     }
 }
 
