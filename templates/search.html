@@ -7,18 +7,7 @@
     <div id="post_body" class="col-md-8 col-md-offset-2" style="padding-top: 1cm">
         <form action="/search/" role="form" id="search_form" method="POST">
             {% csrf_token %}
-        <nav>
-        <ul class="nav navbar-nav">
-            <div class="input-group" style="float: left; padding-left: 10px;">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                <input type="text" name="q" class="form-control" required="required" placeholder="Search here..." style="width: 600px;">
-            </div>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right" style="padding-right: 30px;">
-            <button class="btn btn btn-primary" type="submit">Search</button>
-        </ul>
-        </nav>
+        
         </form>
     </div>
 

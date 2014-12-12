@@ -86,15 +86,15 @@ def ask_question(request):
         post_date = datetime.datetime.now()
         u = User.objects.get(username=request.user.username)
         some_user = UserProfile.objects.get(user=u)
-
+	
+	# -----------Checking if Categories is exists ------#
         category_selected = category_selected.upper()
         category = Category.objects.get(category=category_selected)
-
-        post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,
-                                   category=category)
-        post.tags.all()
+	print category
+        post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
+        # post.tags.all()
         # Adding tags to the object created.
-        post.tags.add(request.POST['post_tags'])
+        # post.tags.add(request.POST['post_tags'])
 
         thisuserupvote = post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = post.userDownVotes.filter(id=request.user.id).count()

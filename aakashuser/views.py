@@ -92,12 +92,21 @@ def register(request):
 
     if request.POST:
         postform = UserForm(data=request.POST)
-
+	print "form is_valid"
+	print postform.is_valid()
         if postform.is_valid():
+			 
             pwd = request.POST['password']
             rpwd = request.POST['password1']
             username = request.POST['username']
             email = request.POST['email']
+            #print "request.POST['netbook_serial_no']"
+            #print request.POST['netbook_serial_no']
+            #print "request.POST['netbook_serial_no']"
+            #print request.POST['netbook_serial_no']
+            #print "request.POST['gender']"
+            #print request.POST['gender']
+            
 
             print username
 
@@ -110,7 +119,12 @@ def register(request):
                 # CREATE
 
                 up = UserProfile.objects.create(user=new_user)
-                up.save()
+		up.netbook_no = request.POST['netbook_serial_no']
+		up.dob = request.POST['date']
+		up.phone_no = request.POST['phone-no']
+		up.gender = request.POST['gender']
+		up.save()
+                
 
             else:
                 er1 = ""
@@ -128,8 +142,11 @@ def register(request):
                 }
 
         else:
-            er3 = "Password should be of min_length 6"
-            print er3
+        
+        	
+            #er3 = "Password should be of min_length 6"
+            # print er3
+            er3 = ""
             temp_dict = {
                 'er3': er3
             }
@@ -411,7 +428,7 @@ def view_profile(request):
             'up': up,
             'posts': related_post,
             'location': up.location,
-            'avatar': "static/images/profile_image/s1.PNG ",
+            'avatar': "static/images/profile_image/default_avatar.PNG ",
             'user_skills': up.user_skills
         }
 
@@ -444,7 +461,7 @@ def view_related_answers(request):
         context_dict = {
             'replies': related_replies,
             'up': up,
-            'avatar': "static/images/profile_image/s1.PNG ",
+            'avatar': "static/images/profile_image/default_avatar.PNG",
             'user': u
         }
     return render_to_response('user_profile/profile_page_ans.html', context_dict, RequestContext(request))

@@ -6,11 +6,26 @@ from django.db.models.signals import post_save
 from taggit.managers import TaggableManager
 from django.db import models
 from django.db.models import *
-from django.contrib.auth.models import User
 from django.contrib import admin
 from django.db.models.signals import post_save
 import datetime
 from datetime import timedelta
+
+
+"""
+
+import urllib, hashlib
+ 
+# Set your variables here
+email = "someone@somewhere.com"
+default = "http://www.example.com/default.jpg"
+size = 40
+ 
+# construct the url
+gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+
+"""
 
 Date = datetime.datetime.now()
 Enddate = Date + datetime.timedelta(days=1)
@@ -21,6 +36,10 @@ class UserProfile(models.Model):#Model for storing a user's information.
     user = OneToOneField(User)
     location = models.CharField(max_length=10, blank=True)
     avatar = models.ImageField(upload_to='static/images/profile_image', blank=True)#for storing user's pic
+    netbook_no = models.CharField(max_length=20, blank=False, default=0)
+    dob = models.DateField(auto_now_add=False, default=Date)
+    phone_no = models.IntegerField(max_length=10, default=0)
+    gender = models.CharField(max_length=10, blank=True)
     online_status = models.BooleanField(default=False)
     user_type = models.IntegerField(max_length=1, default=0)
     user_skills = models.CharField(max_length=100, blank=True)#to mantain user profile
@@ -40,7 +59,7 @@ class UserProfile(models.Model):#Model for storing a user's information.
 
 
 class Category(models.Model): # Model for storing categories of various posts.
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=40)
     description = models.TextField()
 
     def __unicode__(self):
@@ -61,7 +80,7 @@ class Post(models.Model):
     num_votes = models.IntegerField(default=0)
     #reply_count = models.IntegerField(default=0)
 
-    tags = TaggableManager()
+    #tags = TaggableManager()
     post_status = models.IntegerField(max_length=1, default=0)
 
     class Meta:

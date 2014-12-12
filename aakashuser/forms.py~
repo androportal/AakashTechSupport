@@ -79,6 +79,7 @@ class UserForm(forms.ModelForm):
 
         )
 
+	# add DOB field and highets qualification and gender working as 
     password1 = forms.CharField(
         min_length=6,
         max_length=16,
@@ -89,10 +90,13 @@ class UserForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Re-enter password'}),
         )
+        
+   
+	
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password', 'password1']
+        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password1')
 
 """
 class PostForm(forms.ModelForm):
@@ -136,6 +140,7 @@ class PostForm(forms.ModelForm):
 """
 
 class UserProfileForm(forms.ModelForm):
+
     location = forms.CharField(
 			    max_length=30,
 			    error_messages={
@@ -147,6 +152,7 @@ class UserProfileForm(forms.ModelForm):
 			    widget=forms.TextInput(
 				    attrs={'class': 'form-control', 'placeholder': 'Location'}),
 			    )
+			    
     skills = forms.CharField(
 			    max_length=100,
 			    required=True,
@@ -157,13 +163,21 @@ class UserProfileForm(forms.ModelForm):
 			    widget=forms.TextInput(
 				    attrs={'class': 'form-control', 'placeholder': 'Skills'}),
 			    )
+			    
     avatar = forms.ImageField(
 			    label='Profile picture',
 			    help_text='png file of size less than 1MB required.',
 			    required=False,
-			     widget=forms.FileInput(attrs={
+			    widget=forms.FileInput(attrs={
 			     'placeholder': 'Profile picture.'}),
-			      )
+				)
+			      
+
+	
+
+    
     class Meta:
         model = UserProfile
         fields = ('location', 'skills','avatar')
+        
+        

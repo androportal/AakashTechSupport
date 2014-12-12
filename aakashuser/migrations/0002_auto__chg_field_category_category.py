@@ -8,164 +8,19 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'UserProfile'
-        db.create_table(u'aakashuser_userprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
-            ('avatar', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('netbook_no', self.gf('django.db.models.fields.CharField')(default=0, max_length=20)),
-            ('dob', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2014, 12, 12, 0, 0))),
-            ('phone_no', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=10)),
-            ('gender', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
-            ('online_status', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('user_type', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=1)),
-            ('user_skills', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
-            ('num_of_posts', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('reply_count', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal(u'aakashuser', ['UserProfile'])
 
-        # Adding model 'Category'
-        db.create_table(u'aakashuser_category', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('category', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal(u'aakashuser', ['Category'])
-
-        # Adding model 'Post'
-        db.create_table(u'aakashuser_post', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=60)),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('post_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('creator', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.UserProfile'])),
-            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.Category'])),
-            ('post_views', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('num_votes', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('post_status', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=1)),
-        ))
-        db.send_create_signal(u'aakashuser', ['Post'])
-
-        # Adding M2M table for field userUpVotes on 'Post'
-        m2m_table_name = db.shorten_name(u'aakashuser_post_userUpVotes')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('post', models.ForeignKey(orm[u'aakashuser.post'], null=False)),
-            ('user', models.ForeignKey(orm[u'auth.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['post_id', 'user_id'])
-
-        # Adding M2M table for field userDownVotes on 'Post'
-        m2m_table_name = db.shorten_name(u'aakashuser_post_userDownVotes')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('post', models.ForeignKey(orm[u'aakashuser.post'], null=False)),
-            ('user', models.ForeignKey(orm[u'auth.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['post_id', 'user_id'])
-
-        # Adding model 'Reply'
-        db.create_table(u'aakashuser_reply', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.Post'])),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.UserProfile'])),
-            ('reply_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('file_upload', self.gf('django.db.models.fields.files.FileField')(max_length=100, blank=True)),
-            ('upvotes', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('reply_status', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'aakashuser', ['Reply'])
-
-        # Adding model 'Comment'
-        db.create_table(u'aakashuser_comment', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('ans_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.Reply'])),
-            ('comment_body', self.gf('django.db.models.fields.TextField')()),
-            ('created_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('comment_status', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=0)),
-        ))
-        db.send_create_signal(u'aakashuser', ['Comment'])
-
-        # Adding model 'Ticket'
-        db.create_table(u'aakashuser_ticket', (
-            ('user_id', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('topic_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.Category'])),
-            ('tab_id', self.gf('django.db.models.fields.IntegerField')()),
-            ('message', self.gf('django.db.models.fields.TextField')()),
-            ('ticket_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 12, 12, 0, 0))),
-            ('overdue_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 12, 13, 0, 0))),
-            ('closed_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 12, 11, 0, 0))),
-            ('status', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('reopened_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 12, 11, 0, 0))),
-            ('topic_priority', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('duration_for_reply', self.gf('django.db.models.fields.IntegerField')(default=24)),
-        ))
-        db.send_create_signal(u'aakashuser', ['Ticket'])
-
-        # Adding model 'Threads'
-        db.create_table(u'aakashuser_threads', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('reply', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('ticketreply', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['aakashuser.Ticket'])),
-            ('count', self.gf('django.db.models.fields.IntegerField')()),
-        ))
-        db.send_create_signal(u'aakashuser', ['Threads'])
-
-        # Adding model 'Tablet_info'
-        db.create_table(u'aakashuser_tablet_info', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('rcID', self.gf('django.db.models.fields.IntegerField')()),
-            ('rcName', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('start_tab_id', self.gf('django.db.models.fields.IntegerField')()),
-            ('end_tab_id', self.gf('django.db.models.fields.IntegerField')()),
-            ('count', self.gf('django.db.models.fields.IntegerField')()),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=20)),
-        ))
-        db.send_create_signal(u'aakashuser', ['Tablet_info'])
-
+        # Changing field 'Category.category'
+        db.alter_column(u'aakashuser_category', 'category', self.gf('django.db.models.fields.CharField')(max_length=40))
 
     def backwards(self, orm):
-        # Deleting model 'UserProfile'
-        db.delete_table(u'aakashuser_userprofile')
 
-        # Deleting model 'Category'
-        db.delete_table(u'aakashuser_category')
-
-        # Deleting model 'Post'
-        db.delete_table(u'aakashuser_post')
-
-        # Removing M2M table for field userUpVotes on 'Post'
-        db.delete_table(db.shorten_name(u'aakashuser_post_userUpVotes'))
-
-        # Removing M2M table for field userDownVotes on 'Post'
-        db.delete_table(db.shorten_name(u'aakashuser_post_userDownVotes'))
-
-        # Deleting model 'Reply'
-        db.delete_table(u'aakashuser_reply')
-
-        # Deleting model 'Comment'
-        db.delete_table(u'aakashuser_comment')
-
-        # Deleting model 'Ticket'
-        db.delete_table(u'aakashuser_ticket')
-
-        # Deleting model 'Threads'
-        db.delete_table(u'aakashuser_threads')
-
-        # Deleting model 'Tablet_info'
-        db.delete_table(u'aakashuser_tablet_info')
-
+        # Changing field 'Category.category'
+        db.alter_column(u'aakashuser_category', 'category', self.gf('django.db.models.fields.CharField')(max_length=20))
 
     models = {
         u'aakashuser.category': {
             'Meta': {'object_name': 'Category'},
-            'category': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'category': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },

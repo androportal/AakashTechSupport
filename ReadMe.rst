@@ -80,6 +80,10 @@ Usage
 - Run the script populate.py which enters details of remote center into the table Tabletinfo from the details_of_rc.csv file ::
     
     python populate.py
+    
+- Run the script populate_category.py which enters lists of categories into the table categoriy from the details_of_rc.csv file ::
+    
+    python populate_category.py
 
 - Start the server using the command ::
 
