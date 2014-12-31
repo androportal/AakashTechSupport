@@ -1,7 +1,7 @@
 .tag-cell {
 
     width: 230px;
-    border-bottom: 1px dotted rgb(224, 224, 224);
+    border-bottom: 3px dotted rgb(224, 224, 224);
     border-bottom-width: 1px;
     border-bottom-style: dotted;
     border-bottom-color: rgb(224, 224, 224);
@@ -16,8 +16,9 @@
 }
 
 .item-multiplier {
-    font-size: 90%;
-    font-weight: normal;
+    font-size: 100%;
+    font-weight: bold;
+    
     margin-right: 4px;
         margin-right-value: 4px;
         margin-right-ltr-source: physical;

@@ -37,7 +37,7 @@ class UserForm(forms.ModelForm):
             'required': 'First name is required.'
         },
         validators=[
-            RegexValidator('^[a-zA-Z]*$', message='First name must be Alphanumeric'),
+            RegexValidator('^[a-zA-Z]*$', message='First name must be Albhates'),
         ],
         widget=forms.TextInput(
             attrs={'class': 'form-control', 'placeholder': 'Coordinator first name*.'}),
@@ -51,7 +51,7 @@ class UserForm(forms.ModelForm):
             'required': 'Last name is required.'
         },
         validators=[
-            RegexValidator('^[a-zA-Z]*$', message='Last name must be Alphanumeric'),
+            RegexValidator('^[a-zA-Z]*$', message='Last name must be Alphabates'),
         ],
         widget=forms.TextInput(
             attrs={'class': 'form-control', 'placeholder': 'Coordinator last name*.'}),
@@ -91,12 +91,39 @@ class UserForm(forms.ModelForm):
             attrs={'class': 'form-control', 'placeholder': 'Re-enter password'}),
         )
         
+    netbook_serial_no = forms.CharField(
+    	max_length=20,
+    	required=True,
+    	error_messages={
+            'required': 'Please enter netbook number'
+        },
+        validators=[
+            RegexValidator('^[a-zA-Z0-9]*$', message='netbook number should be numeric'),
+        ],
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'please enter netbook number'}),
+        )
+    	 
+    #dob = models.DateField(auto_now_add=False, default=Date)
+    netbook_serial_no = forms.CharField(
+    	max_length=20,
+    	required=True,
+    	error_messages={
+            'required': 'Please enter netbook number'
+        },
+        validators=[
+            RegexValidator('^[a-zA-Z0-9]*$', message='netbook number should be numeric'),
+        ],
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'please enter netbook number'}),
+        )
+    	 
+    	 
+    
    
-	
-
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password1')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password1','netbook_serial_no')
 
 """
 class PostForm(forms.ModelForm):

@@ -32,69 +32,32 @@
 	  <div class="container-fluid">
 
 		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header" style="padding-top: 0.2cm;">
+		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 		    <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
+		    
 		  </button>
-
-		  <a href="/">
-              <img src = "{% static 'images/netbook-logo.png' %}" alt="Netbook Logo"/>
-		  </a>
+			
+	          <a href="/">
+		  <img src = "{% static 'images/netbook-logo.png' %}" alt="Netbook Logo"/>
+	          </a>
+	          
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	<!-- 
-		  <ul class="nav navbar-nav">
-		    <li class="dropdown">
-		      <a href="#" class="dropdown-toggle" data-toggle="dropdown">darkdefender27 <b class="caret"></b></a>
-		      <ul class="dropdown-menu">
-		        <li><a href="#">Edit Profile</a></li>
-		        <li><a href="#">Preferences</a></li>
-		        <li><a href="#">Settings</a></li>
-		        <li class="divider"></li>
-		        <li><a href="#">Log Out</a></li>
-		      </ul>
-		    </li>
-		  </ul>  
-	-->
-		  <ul class="nav navbar-nav navbar-right" style="padding-top: 0.8cm;">
-			<li>
-			  <form class="navbar-form navbar-left" role="search" action="/search/" method="POST">
-			  	{% csrf_token %}
-				<div class="form-group">
-                    <div class="input-group">
-				        <input type="text" name="q" class="form-control" placeholder="Search">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                    </div>
-				</div>
-			  </form>
-		    </li>
-<!-- 		    
-		    <li class="dropdown">
-		      <a href="#" class="dropdown-toggle" data-toggle="dropdown">darkdefender27 <b class="caret"></b></a>
-		      <ul class="dropdown-menu">
-		        <li><a href="#">Settings</a></li>
-		        <li><a href="#">Preferences</a></li>
-		        <li class="divider"></li>
-		        <li><a href="#">LogOut</a></li>
-		      </ul>
-		    </li>
-		  </ul>
--->	  
-			{% if user.is_authenticated %}
+	
+		  <ul class="nav navbar-nav navbar-right">
+		  	{% if user.is_authenticated %}
 			<li>
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ user.username }} <b class="caret"></b></a>
-		      <ul class="dropdown-menu">
+		      	<ul class="dropdown-menu">
 		        <li><a href="/">Home</a></li>
 		        <li><a href="/aakashuser/view_profile/">Profile</a></li>
-                <li><a href="/aakashuser/profile/">Edit Profile</a></li>
+                	<li><a href="/aakashuser/profile/">Edit Profile</a></li>
 		        <li class="divider"></li>
 		        <li><a href="/logout/">Logout</a></li>
-		      </ul>
+		        </ul>
 			</li>
 			{% else %}
 			<li>
@@ -104,7 +67,18 @@
 				<a href="/register/">Register</a>
 			</li>
 			{% endif %}
-          </ul>
+			<li>
+			   <form class="navbar-form navbar-left" role="search" action="/search/" method="POST">
+			  	{% csrf_token %}
+				
+                    		<div class="input-group">
+				        <input type="text" name="q" class="form-control" placeholder="Search">
+                        		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    		</div>
+			
+			  </form>
+		        </li>
+		</ul>
 		</div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>

@@ -19,24 +19,24 @@ def all_questions_view(request, url):
 
     if url == 'latest':
         posts = Post.objects.all().order_by("-post_date")
-        posts = Post.objects.filter(post_status=1)
+        posts = Post.objects.filter(post_status=0)
 
         context_dict = {
             'posts': posts,
 
         }
 
-    elif url == 'frequent':
-        posts = Post.objects.all().order_by("-post_views")
-        posts = Post.objects.filter(post_status=1)
-        context_dict = {
-            'posts': posts,
+    #elif url == 'frequent':
+        #posts = Post.objects.all().order_by("-post_views")
+        #posts = Post.objects.filter(post_status=1)
+        #context_dict = {
+            #'posts': posts,
 
-        }
+        #}
 
     elif url == 'num_votes':
-        posts = Post.objects.all().order_by("-num_votes")
-        posts = Post.objects.filter(post_status=1)
+        posts = Post.objects.all().order_by("num_votes")
+        posts = Post.objects.filter(post_status=0)
         context_dict = {
             'posts': posts,
         }
@@ -59,7 +59,7 @@ def all_questions_view(request, url):
 
     elif url == '':
         posts = Post.objects.all()
-        posts = Post.objects.filter(post_status=1)
+        posts = Post.objects.filter(post_status=0)
 
         context_dict = {
             'posts': posts,
@@ -85,6 +85,8 @@ def ask_question(request):
         print category_selected
         post_date = datetime.datetime.now()
         u = User.objects.get(username=request.user.username)
+        print "username"
+        print u
         some_user = UserProfile.objects.get(user=u)
 	
 	# -----------Checking if Categories is exists ------#
@@ -92,10 +94,7 @@ def ask_question(request):
         category = Category.objects.get(category=category_selected)
 	print category
         post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
-        # post.tags.all()
-        # Adding tags to the object created.
-        # post.tags.add(request.POST['post_tags'])
-
+    
         thisuserupvote = post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = post.userDownVotes.filter(id=request.user.id).count()
 
@@ -119,6 +118,8 @@ def ask_question(request):
             categories = Category.objects.all()
             print "categories"
             print categories
+            print "username"
+            print user
             
             c = {
                 'user': user,
@@ -220,31 +221,41 @@ def vote_post(request):
 
 def link_question(request, qid):
     context = RequestContext(request)
+    print "qid"
+    print qid
+   
     posts = Post.objects.get(pk=qid)
     replies = Reply.objects.filter(title=posts)
-
+	
     thisuserupvote = posts.userUpVotes.filter(id=request.user.id).count()
     thisuserdownvote = posts.userDownVotes.filter(id=request.user.id).count()
 
     net_count = posts.userUpVotes.count() - posts.userDownVotes.count()
-
+    print "link_questions"
+    print replies
+    print request.user.username
+    print posts
+    #print replies.username
+    #print replies.user
     context_dict = {
-        'user': request.user,
-        'posts': posts,
-        'post_replies': replies,
-        'thisUserUpvote': thisuserupvote,
-        'thisUserDownvote': thisuserdownvote,
-        'net_count': net_count
+	'user': request.user,
+	'posts': posts,
+	'post_replies': replies,
+	'thisUserUpvote': thisuserupvote,
+	'thisUserDownvote': thisuserdownvote,
+	'net_count': net_count
     }
-
-    return render_to_response('questions/question_page.html', context_dict, context)
-
+	
+    return render_to_response('questions/question_page.html', context_dict, context)    
 
 def view_tags(request):
     context = RequestContext(request)
     tags = Category.objects.all()
+    print "tags"
+    print tags
 
     for i in tags:
+    	print i
         i.count = len(Post.objects.filter(category=i))
 
     context_dict = {

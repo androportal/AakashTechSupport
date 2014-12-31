@@ -87,6 +87,7 @@
     <div style="padding-left: 25px; padding-right: 25px; padding-bottom: 20px; padding-top: 10px;">
 		<form role="form" name="login_form" method="post">
 		{% csrf_token %}
+		
 		<i class="fa fa-user fa-5x"></i>			
 
 	   			<div class="input-group">
@@ -133,7 +134,7 @@
 				       
 				<div class="input-group date" id="datetimePicker">
 				       	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-					<input type="text" class="form-control" name="date" id="date-input" placeholder="Valid format : YYYY-MM-DD" />
+					<input type="text" class="form-control" name="date" id="date-input" placeholder="DOB format: YYYY-MM-DD" required="required"/>
 				
 				</div>
 				</div>
@@ -158,10 +159,11 @@
 	   			
 	
 </div>
-			
+		
 			    <!-- ERRORS, IF ANY IN POSTFORM -->
-			    
+			    	{{postform.errors}}
 				{% if er1 or er2 or postform.errors%}
+				
 				<div class="alert alert-danger">
 					{% for i in postform.errors %}
 					<p>
@@ -176,13 +178,18 @@
 					    {% if i == "last_name" %}
 						Last name should consist of alphabets
 					    {% endif %}
+					    
 					    {% if i == "password" %}
 						Password should has atleast 6 length
 					    {% endif %}
+					    
+					    {% if i == "phone_no" %}
+						Please enter correct phone number
+					    {% endif %}
 		        		</p>
-				`	{% endfor %}
+					{% endfor %}
 				
-				{% if er1 %}
+				<!--{% if er1 %}
 					<p> {{ er1 }} </p>
 				{% endif %}
 
@@ -192,7 +199,7 @@
 
                 		{% if er3 %}
                 			<p>{{ er3 }}</p>
-                		{% endif %}
+                		{% endif %}-->
 
 				</div>
 			    {% endif %}

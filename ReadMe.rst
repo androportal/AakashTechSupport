@@ -51,14 +51,14 @@ Usage
 
 - Create 'techsupport' database in 'MySQL'.
 
-  Open `AakashTechSupport/AakashTechSupport/settings.py` file and do the following changes ::
+- Open `AakashTechSupport/AakashTechSupport/settings.py` file and do the following changes ::
 
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backend.mysql',
         'NAME'  : 'techsupport',
-        # user and password is provide `AakashTechSupport/AakashTechSupport/top_secret.py` file.
-        # for server deployment it will be blank 
+         # user and password is provide `AakashTechSupport/AakashTechSupport/top_secret.py` file.
+         # for server deployment it will be blank 
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -66,15 +66,22 @@ Usage
         }
     }
 
-- For development on localhost open `AakashTechSupport/AakashTechSupport/wsgi.py` file and do following changes.
+- For development on localhost open `AakashTechSupport/AakashTechSupport/wsgi.py` file and do following changes ::
 
-	sys.path.append('/home/path/to/AakashTechSupport')
+    sys.path.append('/home/path/to/AakashTechSupport')
 	
-	activate_this = '/home/path/to/bin/activate_this.py'
+    activate_this = '/home/path/to/bin/activate_this.py'
+
+- For development on localhost open `AakashTechSupport/AakashTechSupport/top_secret.py` file and do following changes ::
+
+    db_user='root' (MySql username)
+    
+    db_pass = 'root' (MySql password)
 	
 - Populate the database using the following command ::
 
     cd /path/to/AakashTechSupport
+    
     python manage.py syncdb
 
 - Run the script populate.py which enters details of remote center into the table Tabletinfo from the details_of_rc.csv file ::

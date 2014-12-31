@@ -92,23 +92,19 @@ def register(request):
 
     if request.POST:
         postform = UserForm(data=request.POST)
-	print "form is_valid"
-	print postform.is_valid()
+	
         if postform.is_valid():
 			 
             pwd = request.POST['password']
             rpwd = request.POST['password1']
             username = request.POST['username']
             email = request.POST['email']
-            #print "request.POST['netbook_serial_no']"
-            #print request.POST['netbook_serial_no']
-            #print "request.POST['netbook_serial_no']"
-            #print request.POST['netbook_serial_no']
-            #print "request.POST['gender']"
-            #print request.POST['gender']
-            
-
-            print username
+            netbook_serial_no = request.POST['netbook_serial_no']
+            dob = request.POST['date']
+            phone_no = request.POST['phone-no']
+            gender = request.POST['gender']
+           
+	
 
             if pwd == rpwd and validateEmail(email):
                 temp_user = postform.save(commit=True)
@@ -119,16 +115,17 @@ def register(request):
                 # CREATE
 
                 up = UserProfile.objects.create(user=new_user)
-		up.netbook_no = request.POST['netbook_serial_no']
-		up.dob = request.POST['date']
-		up.phone_no = request.POST['phone-no']
-		up.gender = request.POST['gender']
+		up.netbook_no =  netbook_serial_no
+		up.dob = dob
+		up.phone_no = phone_no
+		up.gender = gender
 		up.save()
                 
 
             else:
                 er1 = ""
                 er2 = ""
+               
 
                 if not validateEmail(email):
                     er2 = "Enter a valid email address. "
@@ -142,14 +139,14 @@ def register(request):
                 }
 
         else:
-        
-        	
-            #er3 = "Password should be of min_length 6"
-            # print er3
-            er3 = ""
-            temp_dict = {
-                'er3': er3
-            }
+            #phone_no = request.POST['phone-no']
+            #print phone_no
+            #er3 = "Please enter netbook number "
+            #print er3
+            
+            #temp_dict = {
+                #'er3': er3
+            #}
             print postform.errors
     else:
         postform = UserForm()
@@ -157,6 +154,7 @@ def register(request):
     context_dict = {
         'postform': postform,
     }
+    print postform.errors
     context_dict.update(temp_dict)
 
     return render_to_response("user_profile/register.html", context_dict, context)

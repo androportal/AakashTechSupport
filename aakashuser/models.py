@@ -38,7 +38,7 @@ class UserProfile(models.Model):#Model for storing a user's information.
     avatar = models.ImageField(upload_to='static/images/profile_image', blank=True)#for storing user's pic
     netbook_no = models.CharField(max_length=20, blank=False, default=0)
     dob = models.DateField(auto_now_add=False, default=Date)
-    phone_no = models.IntegerField(max_length=10, default=0)
+    phone_no = models.IntegerField(max_length=20, default=0)
     gender = models.CharField(max_length=10, blank=True)
     online_status = models.BooleanField(default=False)
     user_type = models.IntegerField(max_length=1, default=0)

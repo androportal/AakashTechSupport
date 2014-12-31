@@ -17,7 +17,6 @@
         <ul class="nav nav-tabs">
           <li style="float: right;"><a href="/questions/unanswered/">Unanswered</a></li>
           <li style="float: right;"><a href="/questions/num_votes/">Votes</a></li>
-          <li style="float: right;"><a href="/questions/frequent/">Frequent</a></li>
           <li style="float: right;" class="active"><a href="/questions/latest/">Latest</a></li>
 
         <h4 style="text-align: left; font-size:18px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold;">
@@ -41,6 +40,7 @@
     </div>
 
     <div id="mainbar">
+    <form id="postform" role="form" method="POST">
         <div id="questions" class="content-padding">
             <div id="question-summary" class="question-summary">
 
@@ -115,29 +115,7 @@
 
     </div>
     </div>
-
-<!--
-    <div class="container  footer_padding" style="padding-top:2.5cm;">
-        {% for i in posts %}
-
-    <h2>?<i class="fa fa-question-circle"><a href="/questions/link/{{i.pk}}/" >{{i.title}}</a></h2>
-    <h5><b>POST~<b/></h5>
-
-        <h5><p class="lead text-info">
-            {{ i.body|safe|linebreaks }}</p></h5>
-        <b>votes</b> = {{i.upvotes}}
-
-    <div class="post_meta">
-        by: <b>{{i.creator}}</b> | {{ i.post_date }}
-    </div>
-    <br/>
-
-    {% endfor %}
-    </div>
-
-    -->
-
-
+</form>
 
 {% endblock %}
 
