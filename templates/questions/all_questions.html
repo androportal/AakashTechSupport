@@ -11,7 +11,7 @@
 
     <!-- ALL_QUESTIONS SUB_HEADER -->
 
-    <div class="container-fluid" >
+    <div class="container-fluid"  style="padding-top: 0.1cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         <ul class="nav nav-tabs">
@@ -31,12 +31,12 @@
 
     <!-- ALL_QUESTIONS PAGE CONTENT -->
 
-    <div class="container-fluid"  >
+    <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 2cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         {% for post in posts %}
 
-    <div style="padding-top: 0.5cm;">
+    <div style="padding-top: 0.3cm;">
     </div>
 
     <div id="mainbar">
@@ -47,7 +47,7 @@
                     <div class="stats-container">
                     <div class="stats-arrow">
                     </div>
-                    <div class="stats" style="width: 10%; float:left;">
+                    <div class="stats" style="width: 10%; float:left; ">
                         <div class="vote">
                             <div class="votes">
                                <span class="vote-count-post">
@@ -61,21 +61,19 @@
 
                         <div class="status unanswered">
                             <strong>
-                              0 {{ reply_count }}
+                                0
                             </strong>
                             ans
                         </div>
                     </div>
                     </div>
 
-
-
-                    <div class="summary" style="float: left; width: 70%; padding-left: 20px;">
-                    <h8>
+                    <div class="summary" style="float: left; width: 70%; padding-left: 10px;">
+                    <h3>
                         <a class="question-hyperlink" href="/questions/{{ post.id }}" style="font-size: 19px;" >
                             {{ post.title }}
                         </a>
-                    </h8>
+                    </h3>
                     <div class="excerpt">
                         {{ post.body }}
                     </div>
@@ -92,49 +90,32 @@
                                     {{ post.creator.user.username }}
                                 </span>
                             </div>
-
                             <div class="user-gravatar32">
                                 <a href="/users/1">
                                     <div class="gravatar-wrapper-32">
                                     </div>
-
                                 </a>
-
                             </div>
-
                             <div class="user-details">
-
                                 <a href="/users/1">
                                 </a>
-
                                 <br>
-
                                 </br>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
 
 
             </div>
-
         </div>
-
     </div>
 
     {% endfor %}
 
     </div>
-
     </div>
-
 </form>
-
-
 
 {% endblock %}
 

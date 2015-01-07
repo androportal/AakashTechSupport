@@ -18,10 +18,9 @@ def all_questions_view(request, url):
     context_dict = {}
 
     if url == 'latest':
-	print "url_latest"
         posts = Post.objects.all().order_by("-post_date")
         posts = Post.objects.filter(post_status=0)
-        
+
         context_dict = {
             'posts': posts,
 
@@ -37,8 +36,7 @@ def all_questions_view(request, url):
 
     elif url == 'num_votes':
         posts = Post.objects.all().order_by("num_votes")
-	print posts
-        #posts = Post.objects.filter(post_status=0)
+        posts = Post.objects.filter(post_status=0)
         context_dict = {
             'posts': posts,
         }
@@ -46,8 +44,6 @@ def all_questions_view(request, url):
     elif url == 'unanswered':
         posts = Post.objects.all()
         replies = Reply.objects.all()
-	print "replies1"
-	print replies
         files = []
 
         for p in posts:
@@ -59,16 +55,12 @@ def all_questions_view(request, url):
                 files.append(p)
             context_dict = {
                 'posts': files,
-
             }
 
     elif url == '':
-	print "blank url"
         posts = Post.objects.all()
         posts = Post.objects.filter(post_status=0)
-  	replies = Reply.objects.filter(title=posts)
 
-	print replies
         context_dict = {
             'posts': posts,
 
@@ -78,7 +70,6 @@ def all_questions_view(request, url):
         'url': url
     }
     context_dict.update(c_dict)
-    print context_dict
 
     return render_to_response('questions/all_questions.html', context_dict, context)
 
@@ -159,15 +150,10 @@ def submit_reply(request, qid):
         some_user = UserProfile.objects.get(user=u)
 
         reply = Reply.objects.create(title=current_post, body=reply_body, upvotes=upvotes, user=some_user)
-        print reply
-	
+        print reply.reply_date
 
         replies = Reply.objects.filter(title=current_post)
-	#print "replies"
-	#print replies
 	count = len(replies)
-	#print "count"
-	#print count
 
         thisuserupvote = current_post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = current_post.userDownVotes.filter(id=request.user.id).count()
@@ -180,9 +166,9 @@ def submit_reply(request, qid):
             'thisUserUpvote': thisuserupvote,
             'thisUserDownvote': thisuserdownvote,
             'net_count': net_count,
-	    'reply_count': count
+            'reply_count': count
         }
-	#print context_dict
+
     else:
         return HttpResponse("Reply failed to process..")
 
@@ -248,13 +234,10 @@ def link_question(request, qid):
 
     net_count = posts.userUpVotes.count() - posts.userDownVotes.count()
     print "link_questions"
-    #print "print replies"
-    #print replies
-    count = len(replies)
-    #print "count1"
-    #print count
+    print replies
     print request.user.username
     print posts
+    count = len(replies)
     #print replies.username
     #print replies.user
     context_dict = {
@@ -264,8 +247,7 @@ def link_question(request, qid):
 	'thisUserUpvote': thisuserupvote,
 	'thisUserDownvote': thisuserdownvote,
 	'net_count': net_count,
- 	'reply_count': count
-
+	'reply_count': count
     }
 	
     return render_to_response('questions/question_page.html', context_dict, context)    

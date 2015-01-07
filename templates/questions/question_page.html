@@ -25,11 +25,11 @@
       </div>
     </div>
 
-    <div class="container-fluid"  style=" padding-bottom: 0.7cm;">
+    <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 0.7cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         <ul class="nav nav-tabs">
-        <h4 style="text-align: left; font-size:18px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold;">
+        <h4 style="text-align: left; font-size:22px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
             {{ posts.title }}
         </h4>
 
@@ -61,7 +61,7 @@
                     </td>
 
                     <!-- POST CELL -->
-                    <td class="postcell" style="padding-top: 0.1cm; padding-left: 0.5cm;">
+                    <td class="postcell" style="padding-top: 0.3cm; padding-left: 0.3cm;">
                         <div>
                             <div class="panel panel-info post-text">
                                 <div class="panel-heading">
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
 
-                            <div class="post-taglist">
+                            <div class="post-taglist" style="padding-top: 0.1cm;">
                                 <a class="post-tag" rel="tag" title="" href="/questions/tags/">
                                     {{ posts.category|lower|capfirst }}
                                 </a>
@@ -92,17 +92,17 @@
     {% if post_replies %}
     
         <!-- ANSWER SECTION -->
-        <div style="padding-top: 0.1cm;">
+        <div >
         </div>
         <ul class="nav nav-tabs">
           
            <li style="float: right;" class="active"><a href="#">New</a></li>
         <h4 style="text-align: left; font-size:18px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold;">
-            {{reply_count }} Answers
+            {{ reply_count }} Answers
         </h4>
 
         </ul>
-	
+
 
         {% for i in post_replies %}
         <table>
@@ -110,14 +110,14 @@
                 <tr>
 
                     <!-- POST CELL -->
-                    <td class="postcell" style="padding-top: 0.1cm; padding-left: 0.5cm;">
+                    <td class="postcell" style="padding-top: 0.3cm; padding-left: 0.3cm;">
                         <div>
                             <div class="panel panel-default post-text">
                                 <div class="panel-heading">
                                     <p style="font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;" class="panel-title">{{ i.body }}</p>
                                 </div>
                             </div>
-                            <div class="" >
+                            <div class="" style="padding-top: 0.1cm;">
                                 posted by
                                 <a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
                                    {{ i.user }}

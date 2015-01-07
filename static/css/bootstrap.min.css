@@ -351,7 +351,8 @@ img{
 }
 
 hr{
-	
+	margin-top:20px;
+	margin-bottom:20px;
 	border:0;
 	border-top:1px solid #eee
 }
@@ -5200,7 +5201,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 }
 
 .panel{
-	margin-bottom:10px;
+	margin-bottom:20px;
 	background-color:#fff;
 	border:1px solid transparent;
 	border-radius:4px;
@@ -5213,7 +5214,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 }
 
 .panel-heading{
-	padding:10px 15px;
+	padding:5px 5px;
 	border-bottom:1px solid transparent;
 	border-top-right-radius:3px;
 	border-top-left-radius:3px
@@ -5419,9 +5420,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 }
 
 .panel-info>.panel-heading{
-	color:#31708f;
-	background-color:#d9edf7;
-	border-color:#bce8f1
+	
 }
 
 .panel-info>.panel-heading+.panel-collapse .panel-body{
