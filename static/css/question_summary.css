@@ -72,15 +72,8 @@ question-summary {
 
 .votes {
     color: rgb(85, 85, 85);
-    padding: 0px 0px 7px;
-        padding-top: 0px;
-        padding-right-value: 0px;
-        padding-bottom: 7px;
-        padding-left-value: 0px;
-        padding-left-ltr-source: physical;
-        padding-left-rtl-source: physical;
-        padding-right-ltr-source: physical;
-        padding-right-rtl-source: physical;
+      padding-top: 8px;
+      padding-bottom: 8px;
     text-align: center;
 }
 
@@ -92,7 +85,10 @@ question-summary {
 
 .vote-count-post {
     display: block;
-    font-size: 24px;
+    font-size: 17px;
+
+
+ 
 }
 
 .unanswered {
@@ -185,11 +181,7 @@ a {
 .post-tag, .post-text .post-tag, .wmd-preview a.post-tag {
     color: rgb(62, 109, 142);
     background-color: rgb(224, 234, 241);
-    border-bottom: 1px solid rgb(179, 206, 225);
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-bottom-color: rgb(179, 206, 225);
-    border-right: 1px solid rgb(179, 206, 225);
+      
         border-right-width-value: 1px;
         border-right-style-value: solid;
         border-right-color-value: rgb(179, 206, 225);
@@ -199,7 +191,7 @@ a {
         border-right-style-rtl-source: physical;
         border-right-color-ltr-source: physical;
         border-right-color-rtl-source: physical;
-    padding: 3px 4px;
+    	padding: 1px 2px;
         padding-top: 3px;
         padding-right-value: 4px;
         padding-bottom: 3px;
@@ -208,7 +200,6 @@ a {
         padding-left-rtl-source: physical;
         padding-right-ltr-source: physical;
         padding-right-rtl-source: physical;
-    margin: 2px 2px 2px 0px;
         margin-top: 2px;
         margin-right-value: 2px;
         margin-bottom: 2px;
@@ -217,14 +208,14 @@ a {
         margin-left-rtl-source: physical;
         margin-right-ltr-source: physical;
         margin-right-rtl-source: physical;
-    text-decoration: none;
+        text-decoration: none;
         -moz-text-decoration-color: -moz-use-text-color;
         -moz-text-decoration-line: none;
         -moz-text-decoration-style: solid;
     font-size: 90%;
     line-height: 1.4;
     white-space: nowrap;
-    display: inline-block;
+
 }
 
 .fr {
@@ -285,7 +276,7 @@ user-info .user-gravatar32 {
         margin-left-value: 5px;
         margin-left-ltr-source: physical;
         margin-left-rtl-source: physical;
-    width: 145px;
+
     overflow: hidden;
         overflow-x: hidden;
         overflow-y: hidden;
@@ -297,7 +288,6 @@ user-info .user-gravatar32 {
 }
 
 #mainbar, .mainbar {
-    float: left;
-    margin-bottom: 0px;
-    width: 735px;
+
+ 
 }

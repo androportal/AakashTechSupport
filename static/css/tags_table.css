@@ -44,7 +44,7 @@
     color: rgb(136, 136, 136);
 }
 
-.post-tag, .post-text .post-tag, .wmd-preview a.post-tag {
+ .post-text .post-tag, .wmd-preview a.post-tag {
     background-color: rgb(224, 234, 241);
     color: rgb(62, 109, 142);
     padding: 3px 4px;

@@ -47,7 +47,7 @@
                     <div class="stats-container">
                     <div class="stats-arrow">
                     </div>
-                    <div class="stats" style="width: 10%; float:left; ">
+                    <div class="stats" style="width: 7%; float:left; ">
                         <div class="vote">
                             <div class="votes">
                                <span class="vote-count-post">
@@ -59,18 +59,34 @@
                             </div>
                         </div>
 
-                        <div class="status unanswered">
-                            <strong>
-                                0
-                            </strong>
-                            ans
+
+                        
+                    </div>
+
+		<div style="width: 7%; float:left; " class="stats">
+                        <div class="vote">
+                            <div class="votes">
+                               <span class="vote-count-post" style="color:#9A4444;">
+                                    0
+                               </span>
+                               <div class="viewcount" style="color:#9A4444;">
+                                   ans
+                               </div>
+                            </div>
                         </div>
+
+
+                       
                     </div>
                     </div>
 
-                    <div class="summary" style="float: left; width: 70%; padding-left: 10px;">
+
+
+
+
+                    <div class="summary" style="float: left; width: 80%; padding-left: 10px;">
                     <h3>
-                        <a class="question-hyperlink" href="/questions/{{ post.id }}" style="font-size: 19px;" >
+                        <a class="question-hyperlink" href="/questions/{{ post.id }}" style="font-size: 16px;" >
                             {{ post.title }}
                         </a>
                     </h3>
@@ -83,19 +99,22 @@
                         </a>
                     </div>
                     <div class="started-fr">
-                        <div class="user-info">
-                            <div class="user-action-time" style="float: left; ">
+                        <div class="user-info" style=" width: 100%;">
+                            <div class="user-action-time" style="float: right; padding-top: 0.1cm; ">
                                 asked by
+				<a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
+
                                 <span class="relativetime" title="2014-06-17 14:05:09Z">
                                     {{ post.creator.user.username }}
                                 </span>
+				</a>
                             </div>
-                            <div class="user-gravatar32">
-                                <a href="/users/1">
+                            <!--<div class="user-gravatar32">
+                                <a href="/users/1"> 
                                     <div class="gravatar-wrapper-32">
                                     </div>
-                                </a>
-                            </div>
+                                </a> 
+                            </div> -->
                             <div class="user-details">
                                 <a href="/users/1">
                                 </a>

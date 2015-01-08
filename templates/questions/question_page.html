@@ -29,7 +29,7 @@
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         <ul class="nav nav-tabs">
-        <h4 style="text-align: left; font-size:22px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
+        <h4 style="text-align: left; font-size:20px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
             {{ posts.title }}
         </h4>
 
@@ -61,11 +61,12 @@
                     </td>
 
                     <!-- POST CELL -->
-                    <td class="postcell" style="padding-top: 0.3cm; padding-left: 0.3cm;">
+
+<td style="padding-top: 0.3cm; padding-left: 0.3cm; width: 100%; vertical-align: top;" class="postcell" >
                         <div>
                             <div class="panel panel-info post-text">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">{{ posts.body }}</h3>
+                                    <h3 class="panel-title" style="font-size: 15px;">{{ posts.body }}</h3>
                                 </div>
                             </div>
 
@@ -73,16 +74,17 @@
                                 <a class="post-tag" rel="tag" title="" href="/questions/tags/">
                                     {{ posts.category|lower|capfirst }}
                                 </a>
-
-                            </div>
-                            <div class="" style="padding-top: 0.1cm;">
-                                Asked by
+				<div style="float: right; " class="">
+                                asked by
                                 <a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
                                    {{ posts.creator.user.username }}
                                 </a>
                             </div>
+                            </div>
+                            
                         </div>
                     </td>
+                  
                 </tr>
             </tbody>
         </table>
@@ -137,7 +139,7 @@
 
         <form id="post_answer_form" method="POST" action="/questions/submit_reply/{{ posts.pk }}/">
             {% csrf_token %}
-            <h3 id="ans_header" style="display: none;">
+            <h3 id="ans_header" style="display: none;padding-top: 11px; font-size: 18px">
                 Your Answer
             </h3>
 
