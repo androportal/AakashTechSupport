@@ -56,7 +56,7 @@
           <a href='/' title="Go back to Home Page">
 		    <img src = "{% static 'images/netbook.png' %}" height="50px" width="100px" />
           </a>
-		  <h1 style="font-family: Whitney SSm A,Whitney SSm B,verdana,Lucida Grande,sans-serif;"><small>Log In to </small><strong>TechSupport</strong></h1>
+		  <h1 style="font-family: Whitney SSm A,Whitney SSm B,verdana,Lucida Grande,sans-serif;  margin-bottom:1px;" "><small>Log In to </small><strong>TechSupport</strong></h1>
 		</div>
 		
 	<div class="col-md-4 col-md-offset-4">
@@ -67,9 +67,7 @@
 	</ul>
 
 	<div class="light-wrap">
-		<br />
-		<br />
-		<div style="padding-left: 25px; padding-right: 25px; padding-bottom: 20px; padding-top: 10px;">
+		<div style="padding-left: 25px; padding-right: 25px; padding-bottom: 0px; padding-top: 10px;">
 		<form role="form" name="login_form" method="post" id="login_form">
 		{% csrf_token %}
 		<i class="fa fa-user fa-5x"></i>			
@@ -85,7 +83,7 @@
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 					<input type="password" id="pass_word" class="form-control" name="password" placeholder="Password" required="required" />
 			  	</div>
-				<div style="padding-top:0.5cm;padding-bottom:0.5cm;" id="forgot_password">
+				<div style="padding-top:0.1cm;padding-bottom:0.1cm;" id="forgot_password">
 				    <a class="cursor pull-right password-retrieve btn btn-link" onclick="Scroll()" ><small>Forgot your password?</small></a>
 				</div>
 				<br/>

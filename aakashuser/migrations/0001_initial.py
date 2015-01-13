@@ -15,7 +15,7 @@ class Migration(SchemaMigration):
             ('location', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
             ('avatar', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
             ('netbook_no', self.gf('django.db.models.fields.CharField')(default=0, max_length=20)),
-            ('dob', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2015, 1, 7, 0, 0))),
+            ('dob', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2015, 1, 13, 0, 0))),
             ('phone_no', self.gf('django.db.models.fields.CharField')(default=0, max_length=22)),
             ('gender', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
             ('online_status', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -45,6 +45,7 @@ class Migration(SchemaMigration):
             ('post_views', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('num_votes', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('post_status', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=1)),
+            ('ans_count', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
         db.send_create_signal(u'aakashuser', ['Post'])
 
@@ -97,11 +98,11 @@ class Migration(SchemaMigration):
             ('tab_id', self.gf('django.db.models.fields.IntegerField')()),
             ('message', self.gf('django.db.models.fields.TextField')()),
             ('ticket_id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 7, 0, 0))),
-            ('overdue_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 8, 0, 0))),
-            ('closed_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 6, 0, 0))),
+            ('created_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 13, 0, 0))),
+            ('overdue_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 14, 0, 0))),
+            ('closed_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 12, 0, 0))),
             ('status', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('reopened_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 6, 0, 0))),
+            ('reopened_date_time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2015, 1, 12, 0, 0))),
             ('topic_priority', self.gf('django.db.models.fields.IntegerField')(default=1)),
             ('duration_for_reply', self.gf('django.db.models.fields.IntegerField')(default=24)),
         ))
@@ -180,6 +181,7 @@ class Migration(SchemaMigration):
         },
         u'aakashuser.post': {
             'Meta': {'ordering': "['post_date']", 'object_name': 'Post'},
+            'ans_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'body': ('django.db.models.fields.TextField', [], {}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['aakashuser.Category']"}),
             'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['aakashuser.UserProfile']"}),
@@ -223,12 +225,12 @@ class Migration(SchemaMigration):
         },
         u'aakashuser.ticket': {
             'Meta': {'object_name': 'Ticket'},
-            'closed_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 6, 0, 0)'}),
-            'created_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 7, 0, 0)'}),
+            'closed_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 12, 0, 0)'}),
+            'created_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 13, 0, 0)'}),
             'duration_for_reply': ('django.db.models.fields.IntegerField', [], {'default': '24'}),
             'message': ('django.db.models.fields.TextField', [], {}),
-            'overdue_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 8, 0, 0)'}),
-            'reopened_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 6, 0, 0)'}),
+            'overdue_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 14, 0, 0)'}),
+            'reopened_date_time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2015, 1, 12, 0, 0)'}),
             'status': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'tab_id': ('django.db.models.fields.IntegerField', [], {}),
             'ticket_id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -239,7 +241,7 @@ class Migration(SchemaMigration):
         u'aakashuser.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
             'avatar': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'dob': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2015, 1, 7, 0, 0)'}),
+            'dob': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2015, 1, 13, 0, 0)'}),
             'gender': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),

@@ -19,8 +19,9 @@ def all_questions_view(request, url):
 
     if url == 'latest':
         posts = Post.objects.all().order_by("-post_date")
-        posts = Post.objects.filter(post_status=0)
 
+        posts = Post.objects.filter(post_status=0)
+	print posts
         context_dict = {
             'posts': posts,
 
@@ -35,27 +36,21 @@ def all_questions_view(request, url):
         #}
 
     elif url == 'num_votes':
-        posts = Post.objects.all().order_by("num_votes")
-        posts = Post.objects.filter(post_status=0)
+        posts = Post.objects.exclude(num_votes__exact='0')
+	print posts
+
         context_dict = {
             'posts': posts,
         }
-
+	
     elif url == 'unanswered':
-        posts = Post.objects.all()
-        replies = Reply.objects.all()
-        files = []
+	
+	posts = Post.objects.filter(ans_count__exact='0')
+	print posts
 
-        for p in posts:
-            a = 0
-            for r in replies:
-                if r.title.title == p.title:
-                    a = 1
-            if a == 0:
-                files.append(p)
-            context_dict = {
-                'posts': files,
-            }
+	context_dict = {
+	    'posts': posts,
+	}
 
     elif url == '':
         posts = Post.objects.all()
@@ -140,6 +135,8 @@ def submit_reply(request, qid):
 
     if request.POST:
         current_post = Post.objects.get(pk=qid)
+	print "qid"
+	print qid
         print current_post.creator
         print current_post.title
 
@@ -154,6 +151,7 @@ def submit_reply(request, qid):
 
         replies = Reply.objects.filter(title=current_post)
 	count = len(replies)
+	Post.objects.filter(id=qid).update(ans_count=count)
 
         thisuserupvote = current_post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = current_post.userDownVotes.filter(id=request.user.id).count()
@@ -177,6 +175,8 @@ def submit_reply(request, qid):
 
 def vote_post(request):
     post_id = int(request.POST.get('id'))
+    print ""
+    print post_id
     vote_type = request.POST.get('type')
     vote_action = request.POST.get('action')
 

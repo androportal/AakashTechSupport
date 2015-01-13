@@ -31,7 +31,7 @@
 
     <!-- ALL_QUESTIONS PAGE CONTENT -->
 
-    <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 2cm;">
+    <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 3.3cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         {% for post in posts %}
@@ -67,7 +67,7 @@
                         <div class="vote">
                             <div class="votes">
                                <span class="vote-count-post" style="color:#9A4444;">
-                                    0
+                                      {{ post.ans_count }}
                                </span>
                                <div class="viewcount" style="color:#9A4444;">
                                    ans

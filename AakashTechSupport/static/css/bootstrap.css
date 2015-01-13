@@ -561,8 +561,8 @@ a.bg-danger:hover {
   background-color: #e4b9b9;
 }
 .page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
+  padding-bottom: 1px;
+  margin: 10px 0 10px;
   border-bottom: 1px solid #eeeeee;
 }
 ul,
