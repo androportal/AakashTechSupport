@@ -21,47 +21,34 @@
     </div>
     </div>
     <div id="post_body" class="col-md-8 col-md-offset-2" style="padding-top: 0.5cm">
-    <table id="tags-browser" style="width:100%">
+     <table id="tags-browser">
         <tbody>
-        	
-	  <tr>
-	    <td width="50%" class="tag-cell">Category</td>
-	    <td width="50%" class="tag-cell">Questions</td>
-	    <!--<td width="25%" class="tag-cell">Tags</td>-->
-	  </tr>
-  
-            <tr >
+            <tr>
             {% for tag in tags %}
-            
 
-                <td class="tag-cell" >
+                <td class="tag-cell">
                     <a class="post-tag" rel="tag" title="" href="/questions/tagged_questions/{{ tag.pk }}/">
                        {{ tag.category|lower|capfirst }}
                     </a>
-                 </td>
-                 <td class="tag-cell">
                     <span class="item-multiplier">
-                       
+                        <span class="item-multiplier-x">
+                            x
+                        </span>
                         <span class="item-multiplier-count">
                            {{ tag.count|default:"0" }}
                         </span>
                     </span>
-                    
-                    
+                    <div class="excerpt">
+                        
+                        {{ tag.description }}
+                    </div>
                 </td>
-                <!--<td class="tag-cell">
-                	<span class="item-multiplier">
-                       
-		                <span class="item-multiplier-count">
-		                   {{ tag.count|default:"0" }}
-		                </span>
-                    	</span>
-                 </td>-->
-           
+                {% if forloop.counter|divisibleby:"3" %}
             </tr>
-         
+            <tr>
+                {% endif %}
     		{% endfor %}
-            
+            </tr>
         </tbody>
 
     </table>

@@ -21,45 +21,55 @@ def all_questions_view(request, url):
         posts = Post.objects.all().order_by("-post_date")
 
         posts = Post.objects.filter(post_status=0)
-	print posts
+	
         context_dict = {
             'posts': posts,
 
         }
-
-    #elif url == 'frequent':
-        #posts = Post.objects.all().order_by("-post_views")
-        #posts = Post.objects.filter(post_status=1)
-        #context_dict = {
-            #'posts': posts,
-
-        #}
 
     elif url == 'num_votes':
-        posts = Post.objects.exclude(num_votes__exact='0')
-	print posts
-
+    	posts = Post.objects.exclude(num_votes__exact='0')
+        post_tags = []
+       	title_inital = ""
+       	for p in posts:
+       		if title_inital != p.title:
+	       		title_inital = p.title
+	       		tag_id = Post.objects.filter(title = p.title)
+	       		post_tags.append(tag_id)
+		
         context_dict = {
-            'posts': posts,
+            'posts': post_tags,
         }
-	
+
     elif url == 'unanswered':
-	
-	posts = Post.objects.filter(ans_count__exact='0')
-	print posts
-
-	context_dict = {
-	    'posts': posts,
-	}
-
+        posts = Post.objects.filter(ans_count__exact='0')
+	post_tags = []
+       	title_inital = ""
+       	for p in posts:
+       		if title_inital != p.title:
+	       		title_inital = p.title
+	       		tag_id = Post.objects.filter(title = p.title)
+	       		post_tags.append(tag_id)
+		
+        context_dict = {
+            'posts': post_tags,
+        }
     elif url == '':
         posts = Post.objects.all()
-        posts = Post.objects.filter(post_status=0)
-
-        context_dict = {
-            'posts': posts,
-
-        }
+        post_tags = []
+       	title_inital = ""
+       	for p in posts:
+       		if title_inital != p.title:
+	       		
+	       		title_inital = p.title
+	       		tag_id = Post.objects.filter(title = p.title)
+	       		post_tags.append(tag_id)
+         
+	
+    print post_tags
+    context_dict = {
+         'posts': post_tags,
+    }
 
     c_dict = {
         'url': url
@@ -76,27 +86,37 @@ def ask_question(request):
         title = request.POST['post_title']
         body = request.POST['post_text']
         category_selected = request.POST['category']
-        print "get selected categories"
+        print "category_selected"
+        print category_selected
+        if category_selected=="other":
+		category_selected = request.POST['post_tags']
+		
+        print "category_selected"
         print category_selected
         post_date = datetime.datetime.now()
         u = User.objects.get(username=request.user.username)
-        print "username"
-        print u
+      
         some_user = UserProfile.objects.get(user=u)
 	
 	# -----------Checking if Categories is exists ------#
-        category_selected = category_selected.upper()
-        category = Category.objects.get(category=category_selected)
-	print category
-        post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
-    
+        #category_selected = category_selected.upper()
+        category = Category.objects.filter(category=category_selected)
+	if category.exists():
+	  	print "exist"
+       
+		post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
+		
+	else:
+	       
+	        category = request.POST['post_tags']
+		
+		for tag in category.split(","): 
+			category = Category.objects.create(category=tag,description=tag)
+			post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
+			
         thisuserupvote = post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = post.userDownVotes.filter(id=request.user.id).count()
 
-        print "User Upvote and Downvote: "
-        print thisuserupvote
-
-        print thisuserdownvote
         net_count = post.userUpVotes.count() - post.userDownVotes.count()
         que_dict = {
             'posts': post,
@@ -111,10 +131,6 @@ def ask_question(request):
         if request.user.is_authenticated():
             user = request.user
             categories = Category.objects.all()
-            print "categories"
-            print categories
-            print "username"
-            print user
             
             c = {
                 'user': user,
@@ -135,20 +151,14 @@ def submit_reply(request, qid):
 
     if request.POST:
         current_post = Post.objects.get(pk=qid)
-	print "qid"
-	print qid
-        print current_post.creator
-        print current_post.title
-
-        reply_body = request.POST['post_answer']
+	['post_answer']
         upvotes = 0
 
         u = User.objects.get(username=request.user.username)
         some_user = UserProfile.objects.get(user=u)
 
         reply = Reply.objects.create(title=current_post, body=reply_body, upvotes=upvotes, user=some_user)
-        print reply.reply_date
-
+        
         replies = Reply.objects.filter(title=current_post)
 	count = len(replies)
 	Post.objects.filter(id=qid).update(ans_count=count)
@@ -175,8 +185,7 @@ def submit_reply(request, qid):
 
 def vote_post(request):
     post_id = int(request.POST.get('id'))
-    print ""
-    print post_id
+    
     vote_type = request.POST.get('type')
     vote_action = request.POST.get('action')
 

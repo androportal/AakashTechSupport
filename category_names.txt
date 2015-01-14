@@ -1,11 +1,16 @@
-BACK PANEL DAMAGE
-BLURRED SCREEN
-BOOTING
-BUTTON DAMAGE
-CAMERA
-CHARGING PROBLEM
-NO VIDEO DISPLAY
-SCREEN DAMAGE
-USB PORT NOT WORKING
-VOLUME PROBLEM
-WIFI CONNECTIVITY
+other
+booting
+RAM
+hard-drive
+keyboard
+camera
+key
+charging 
+audio
+video
+screen
+display
+usb
+volume
+wifi 
+port

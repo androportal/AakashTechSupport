@@ -6,6 +6,26 @@
 
 
 {% block body_block %}
+<script type="text/javascript">
+
+$(document).ready(function(){ 
+
+ $("#category").change(function(){
+     
+     var cat_name = $("select#category").val();
+   
+     if (cat_name == "other"){
+       
+     	document.getElementById("other_tags").style.display='';
+    
+     }else{
+     	document.getElementById("other_tags").style.display='none';
+     }
+     
+    
+    });
+});
+</script>
 
     <!-- QUESTION POST-->
     <div id="post_body" class="col-md-8 col-md-offset-2">
@@ -43,16 +63,30 @@
 
             <td>
             	
-                <select class="form-control" name="category" style="width: 610px;">
+                <select class="form-control" name="category" id= "category" style="width: 610px;">
                   
-                 {% for i in catg %}
-                  <option>{{ i.category|lower|capfirst }}</option>
-                  {% endfor %}
-                  <!--<option>Software</option>
-                  <option>Hardware</option>-->
+                {% for i in catg %}
+         	<option>{{ i.category }}</option>
+         	{% endfor %}
                 </select>
             </td>
         </tr>
+        </div>
+        <div id="other_tags" style="padding-top: 0.5cm;" >
+            <tr>
+            <td>
+                <label>
+                    <b>Tags</b>
+                </label>
+            </td>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+            <td>
+                <input id="tags" name="post_tags" placeholder="atleast one tag such as('charging', 'display', 'audio','voice','RAM'), at max 5 tags" class="ask-title-field form-control" required="required" type="text" data-max-length="150" data-min-length="15" tabindex="100" maxlength="300" name="title" autocomplete="off" style="z-index: 1; position: relative;">
+                </input>
+            </td>
+            </tr>
         </div>
 	
         <div id="sbutton" style="padding-top: 0.5cm;">
@@ -63,25 +97,7 @@
     </form>
     </div>
 
-    <!-- q.POST ENDS HERE-->
-
-	<!-- FOOTER CODE GOES HERE
-	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-		<div id="footer">
-		  <div class="container">
-			<center>
-				<p class="muted credit">Development on <a href="http://www.aakashlabs.org.in"> Aakash Labs</a> under construction.
-				 &nbsp; |  &nbsp;
-			   	Copyright <a href="http://www.github.com/darkdefender27"> © darkdefender27</a>  Inc. and its affiliates.
-				 &nbsp; |  &nbsp;
-			   	Contact : <a href="https://www.facebook.com/sHuBhAm5/"> ushubham27 </a>			   	
-				</p>
-			</center>
-		  </div>
-		</div>
-	</nav>
-	
-	<!-- END OF FOOTER -->
+   
     <div style="padding-bottom: 25cm;">
     </div>
 
