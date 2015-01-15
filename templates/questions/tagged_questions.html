@@ -4,7 +4,7 @@
 
 {% block body_block %}
 
-    <div class="container-fluid"  style="padding-top: 0.5cm; padding-bottom: 0.7cm;">
+    <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 0.7cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         <ul class="nav nav-tabs">
@@ -21,40 +21,67 @@
 
     {% for post in posts_date %}
 
-    <div style="padding-top: 1cm;">
+    <div style="padding-top: 0.5cm;">
     </div>
 
     <div id="mainbar">
         <div id="questions" class="content-padding">
             <div id="question-summary" class="question-summary">
 
-                    <div class="stats-container">
+                     <div class="stats-container">
                     <div class="stats-arrow">
                     </div>
-                    <div class="stats" style="width: 10%; float:left; padding-top: 10px;">
+                    <div class="stats" style="width: 7%; float:left; ">
                         <div class="vote">
                             <div class="votes">
                                <span class="vote-count-post">
                                     {{ post.num_votes }}
                                </span>
                                <div class="viewcount">
-                                   votes
+                                   {% if p.num_votes == 0 %}
+                                   vote
+				   {% elif p.num_votes == 1 %}
+				   vote
+	                           {% elif p.num_votes == -1 %}
+                                   vote
+				   {% else %}
+				   votes
+				   {% endif %}
                                </div>
                             </div>
                         </div>
 
-                        <div class="status unanswered">
-                            <strong>
-                                0
-                            </strong>
-                            ans
+
+                        
+                    </div>
+
+		<div style="width: 7%; float:left; " class="stats">
+                        <div class="vote">
+                            <div class="votes">
+                               <span class="vote-count-post" style="color:#9A4444;">
+                                      {{ post.ans_count }}
+                               </span>
+                               <div class="viewcount" style="color:#9A4444;">
+                                    {% if p.ans_count == 0 %}
+                                   answer
+				   {% elif p.ans_count == 1 %}
+				   answer
+				   {% else %}
+				   answers
+				   {% endif %}
+                               </div>
+                            </div>
                         </div>
+
+
+                       
                     </div>
                     </div>
 
-                    <div class="summary" style="float: left; width: 70%; padding-left: 40px;">
+
+                    <div class="summary" style="float: left; width: 80%; padding-left: 10px;">
                     <h3>
-                        <a class="question-hyperlink" href="/questions/{{ post.pk }}" style="font-size: 19px;" >
+                        <a class="question-hyperlink" href="/questions/{{ post.id }}" style="font-size: 16px;" >
                             {{ post.title }}
                         </a>
                     </h3>
@@ -62,39 +89,38 @@
                         {{ post.body }}
                     </div>
                     <div class="tags t-search">
-                        <a class="post-tag" rel="tag" title="" href="/questions/tagged_questions/{{ post.pk }}">
-                            {{ mytag|lower|capfirst }}
+                        <a class="post-tag" rel="tag" title="" href="/questions/tagged_questions/{{ post.category.pk }}">
+                            {{ post.category|lower|capfirst }}
                         </a>
                     </div>
                     <div class="started-fr">
-                        <div class="user-info">
-                            <div class="user-action-time" style="float: left;">
+                        <div class="user-info" style=" width: 100%;">
+                            <div class="user-action-time" style="float: right; padding-top: 0.1cm; ">
                                 asked by
+				<a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
+
                                 <span class="relativetime" title="2014-06-17 14:05:09Z">
                                     {{ post.creator.user.username }}
                                 </span>
+				</a>
                             </div>
                             <div class="user-gravatar32">
-                                <a href="/users/1">
+                                <a href="/users/1"> 
                                     <div class="gravatar-wrapper-32">
                                     </div>
-                                </a>
-                            </div>
+                                </a> 
+                            </div> 
                             <div class="user-details">
                                 <a href="/users/1">
                                 </a>
-                                <br>
-                                </br>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-
     {% endfor %}
 
     </div>

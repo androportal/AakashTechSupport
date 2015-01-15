@@ -34,11 +34,29 @@ def all_questions_view(request, url):
         }
 
     elif url == 'unanswered':
-		posts = Post.objects.filter(ans_count__exact='0')
-		post_tags = gettags_by_title(posts)
-		context_dict = {
-			'posts': post_tags,
-		}
+	posts = Post.objects.all()
+        replies = Reply.objects.all()
+        files = []
+	for p in posts:
+            a = 0
+            for r in replies:
+                if r.title.title == p.title:
+                    a = 1
+            if a == 0:
+                files.append(p)
+            
+       
+	post_tags = []
+       	title_inital = ""
+       	for p in files:
+       		if title_inital != p.title:
+	       		title_inital = p.title
+	       		tag_id = Post.objects.filter(title = p.title)
+	       		post_tags.append(tag_id)
+		
+        context_dict = {
+            'posts': post_tags,
+        }
 		
     elif url == '':
 		posts = Post.objects.all()

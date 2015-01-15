@@ -403,6 +403,13 @@ def view_profile(request):
     # if UserProfile already exists for the user then display the profile
     up = UserProfile.objects.get(user=u)
     related_post = Post.objects.filter(creator=up)
+    post_tags = []
+    title_inital = ""
+    for p in related_post:
+	if title_inital != p.title:
+		title_inital = p.title
+		tag_id = Post.objects.filter(title = p.title)
+		post_tags.append(tag_id)
 
     try:
         up = UserProfile.objects.get(user=u)
@@ -416,7 +423,7 @@ def view_profile(request):
     if up.avatar:
         context_dict = {
             'up': up,
-            'posts': related_post,
+            'posts': post_tags,
             'location': up.location,
             'avatar': up.avatar,
             'user_skills': up.user_skills
@@ -424,7 +431,7 @@ def view_profile(request):
     else:
         context_dict = {
             'up': up,
-            'posts': related_post,
+            'posts': post_tags,
             'location': up.location,
             'avatar': "static/images/profile_image/default_avatar.PNG ",
             'user_skills': up.user_skills
