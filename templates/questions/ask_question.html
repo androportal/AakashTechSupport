@@ -13,17 +13,30 @@ $(document).ready(function(){
  $("#category").change(function(){
      
      var cat_name = $("select#category").val();
+     if(cat_name != "--Please Select Tag--")
+     {
+     	document.getElementById("post_que").disabled=false;
+     	
+     }else{
+     	document.getElementById("post_que").disabled=true;
+	}
    
      if (cat_name == "other"){
        
      	document.getElementById("other_tags").style.display='';
+     	$("#tags").prop("required", true);
+     	
     
      }else{
+        $("#tags").prop("required", false);
      	document.getElementById("other_tags").style.display='none';
+     	document.getElementById("tags").hide();
+     	
      }
      
     
     });
+    
 });
 </script>
 
@@ -64,15 +77,16 @@ $(document).ready(function(){
             <td>
             	
                 <select class="form-control" name="category" id= "category" style="width: 610px;">
-                  
+                <option>--Please Select Tag--</option> 
                 {% for i in catg %}
          	<option>{{ i.category }}</option>
          	{% endfor %}
+
                 </select>
             </td>
         </tr>
         </div>
-        <div id="other_tags" style="padding-top: 0.5cm;" >
+        <div id="other_tags" style="padding-top: 0.5cm; display:none;" >
             <tr>
             <td>
                 <label>
@@ -83,14 +97,14 @@ $(document).ready(function(){
                 &nbsp;
                 &nbsp;
             <td>
-                <input id="tags" name="post_tags" placeholder="atleast one tag such as('charging', 'display', 'audio','voice','RAM'), at max 5 tags" class="ask-title-field form-control" required="required" type="text" data-max-length="150" data-min-length="15" tabindex="100" maxlength="300" name="title" autocomplete="off" style="z-index: 1; position: relative;">
+                <input id="tags" name="post_tags" hidden=false placeholder="atleast one tag such as('charging', 'display', 'audio','voice','RAM'), at max 5 tags" class="ask-title-field form-control" type="text" data-max-length="150" data-min-length="15" tabindex="100" maxlength="300" name="title" autocomplete="off" style="z-index: 1; position: relative;">
                 </input>
             </td>
             </tr>
         </div>
 	
         <div id="sbutton" style="padding-top: 0.5cm;">
-            <button class="btn btn btn-primary" type="submit">Post your Question</button>
+            <button class="btn btn btn-primary" id = "post_que" type="submit" disabled=true>Post your Question</button>
             <button style="padding-left: 10px;" class="btn btn btn-default" type="reset">Clear</button>
 
         </div>

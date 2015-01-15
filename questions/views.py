@@ -18,68 +18,50 @@ def all_questions_view(request, url):
     context_dict = {}
 
     if url == 'latest':
-        posts = Post.objects.all().order_by("-post_date")
+		posts = Post.objects.all().order_by("-post_date")
 
-        posts = Post.objects.filter(post_status=0)
-	
-        context_dict = {
-            'posts': posts,
-
-        }
+		posts = Post.objects.filter(post_status=0)
+		post_tags = gettags_by_title(posts)
+		context_dict = {
+		'posts': post_tags,
+		}
 
     elif url == 'num_votes':
     	posts = Post.objects.exclude(num_votes__exact='0')
-        post_tags = []
-       	title_inital = ""
-       	for p in posts:
-       		if title_inital != p.title:
-	       		title_inital = p.title
-	       		tag_id = Post.objects.filter(title = p.title)
-	       		post_tags.append(tag_id)
-		
+        post_tags = gettags_by_title(posts)
         context_dict = {
             'posts': post_tags,
         }
 
     elif url == 'unanswered':
-        posts = Post.objects.filter(ans_count__exact='0')
-	post_tags = []
-       	title_inital = ""
-       	for p in posts:
-       		if title_inital != p.title:
-	       		title_inital = p.title
-	       		tag_id = Post.objects.filter(title = p.title)
-	       		post_tags.append(tag_id)
+		posts = Post.objects.filter(ans_count__exact='0')
+		post_tags = gettags_by_title(posts)
+		context_dict = {
+			'posts': post_tags,
+		}
 		
-        context_dict = {
-            'posts': post_tags,
-        }
     elif url == '':
-        posts = Post.objects.all()
-        post_tags = []
-       	title_inital = ""
-       	for p in posts:
-       		if title_inital != p.title:
-	       		
-	       		title_inital = p.title
-	       		tag_id = Post.objects.filter(title = p.title)
-	       		post_tags.append(tag_id)
-         
-	
-    print post_tags
-    context_dict = {
-         'posts': post_tags,
-    }
+		posts = Post.objects.all()
+		post_tags = gettags_by_title(posts)
 
-    c_dict = {
-        'url': url
-    }
-    context_dict.update(c_dict)
+		context_dict = {
+			'posts': post_tags,
+		}
 
     return render_to_response('questions/all_questions.html', context_dict, context)
 
+def gettags_by_title(posts):
 
+	post_tags = []
+	title_inital = ""
+	for p in posts:
+		if title_inital != p.title:
+			title_inital = p.title
+			tag_id = Post.objects.filter(title = p.title)
+			post_tags.append(tag_id)
 
+	return post_tags
+	
 def ask_question(request):
     context = RequestContext(request)
     if request.POST:
@@ -103,7 +85,7 @@ def ask_question(request):
         category = Category.objects.filter(category=category_selected)
 	if category.exists():
 	  	print "exist"
-       
+       		category = Category.objects.get(category=category_selected)
 		post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
 		
 	else:
@@ -150,32 +132,32 @@ def submit_reply(request, qid):
     context_dict = {}
 
     if request.POST:
-        current_post = Post.objects.get(pk=qid)
-	['post_answer']
-        upvotes = 0
+		current_post = Post.objects.get(pk=qid)
+		reply_body = request.POST['post_answer']
+		upvotes = 0
 
-        u = User.objects.get(username=request.user.username)
-        some_user = UserProfile.objects.get(user=u)
+		u = User.objects.get(username=request.user.username)
+		some_user = UserProfile.objects.get(user=u)
 
-        reply = Reply.objects.create(title=current_post, body=reply_body, upvotes=upvotes, user=some_user)
-        
-        replies = Reply.objects.filter(title=current_post)
-	count = len(replies)
-	Post.objects.filter(id=qid).update(ans_count=count)
+		reply = Reply.objects.create(title=current_post, body=reply_body, upvotes=upvotes, user=some_user)
 
-        thisuserupvote = current_post.userUpVotes.filter(id=request.user.id).count()
-        thisuserdownvote = current_post.userDownVotes.filter(id=request.user.id).count()
-        net_count = current_post.userUpVotes.count() - current_post.userDownVotes.count()
+		replies = Reply.objects.filter(title=current_post)
+		count = len(replies)
+		Post.objects.filter(id=qid).update(ans_count=count)
 
-        context_dict = {
-            'user': request.user,
-            'posts': current_post,
-            'post_replies': replies,
-            'thisUserUpvote': thisuserupvote,
-            'thisUserDownvote': thisuserdownvote,
-            'net_count': net_count,
-            'reply_count': count
-        }
+		thisuserupvote = current_post.userUpVotes.filter(id=request.user.id).count()
+		thisuserdownvote = current_post.userDownVotes.filter(id=request.user.id).count()
+		net_count = current_post.userUpVotes.count() - current_post.userDownVotes.count()
+
+		context_dict = {
+			'user': request.user,
+			'posts': current_post,
+			'post_replies': replies,
+			'thisUserUpvote': thisuserupvote,
+			'thisUserDownvote': thisuserdownvote,
+			'net_count': net_count,
+			'reply_count': count
+		}
 
     else:
         return HttpResponse("Reply failed to process..")
