@@ -29,10 +29,14 @@
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
 
         <ul class="nav nav-tabs">
+         {% for p in posts %}
+         {% if forloop.counter < 2 %}
+        
         <h4 style="text-align: left; font-size:20px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
-            {{ posts.title }}
+            {{ p.title }}
         </h4>
-
+        {% endif %}
+	{% endfor %}
         </ul>
 
         <table>
@@ -63,24 +67,36 @@
                     <!-- POST CELL -->
 
 <td style="padding-top: 0.3cm; padding-left: 0.3cm; width: 100%; vertical-align: top;" class="postcell" >
+			 {% for p in posts %}
+         		{% if forloop.counter < 2 %}
                         <div>
                             <div class="panel panel-info post-text">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title" style="font-size: 15px;">{{ posts.body }}</h3>
+                                    <h3 class="panel-title" style="font-size: 15px;">{{ p.body }}</h3>
                                 </div>
                             </div>
-
+			{% endif %}
+			{% endfor  %}	
+			
                             <div class="post-taglist" style="padding-top: 0.1cm;">
+                            {% for p in posts %}
                                 <a class="post-tag" rel="tag" title="" href="/questions/tags/">
-                                    {{ posts.category|lower|capfirst }}
+                                    {{ p.category|lower|capfirst }}
                                 </a>
+                               {% endfor %}
+                              </div>
+                        
+                               {% for p in posts %}
+         		{% if forloop.counter < 2 %}
 				<div style="float: right; " class="">
                                 asked by
                                 <a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
-                                   {{ posts.creator.user.username }}
+                                   {{ p.creator.user.username }}
                                 </a>
                             </div>
-                            </div>
+                            {% endif %}
+			{% endfor  %}	
+                            
                             
                         </div>
                     </td>
@@ -136,8 +152,9 @@
         <!-- ANSWER SECTION ENDS HERE -->
 
         <!-- SUBMIT REPLY FORM -->
-
-        <form id="post_answer_form" method="POST" action="/questions/submit_reply/{{ posts.pk }}/">
+	{% for p in posts %}
+         {% if forloop.counter < 2 %}
+        <form id="post_answer_form" method="POST" action="/questions/submit_reply/{{ p.pk }}/">
             {% csrf_token %}
             <h3 id="ans_header" style="display: none;padding-top: 11px; font-size: 18px">
                 Your Answer
@@ -147,7 +164,8 @@
             </div>
 
         </form>
-
+	 {% endif %}
+	{% endfor %}
         <!-- MODAL ALERT -->
 
         <!-- SMALL MODAL -->
@@ -168,6 +186,12 @@
         </div>-->
 
         <div id="ans_buttons" style="vertical-align: top; float: left;">
+        	
+        
+        <h4 style="text-align: left; font-size:20px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
+           
+        </h4>
+       
             {% if user.is_authenticated %}
             <button id="add_answer" title="Add Answer" class="btn btn btn-primary" type="button">Add your answer</button>
             {% else %}

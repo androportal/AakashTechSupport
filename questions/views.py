@@ -65,6 +65,10 @@ def all_questions_view(request, url):
 		context_dict = {
 			'posts': post_tags,
 		}
+    c_dict = {
+        'url': url
+    }
+    context_dict.update(c_dict)
 
     return render_to_response('questions/all_questions.html', context_dict, context)
 
@@ -113,18 +117,21 @@ def ask_question(request):
 		for tag in category.split(","): 
 			category = Category.objects.create(category=tag,description=tag)
 			post = Post.objects.create(title=title, body=body, post_date=post_date, creator=some_user,category=category)
-			
+	
+	tag_id = Post.objects.filter(title = title)		
         thisuserupvote = post.userUpVotes.filter(id=request.user.id).count()
         thisuserdownvote = post.userDownVotes.filter(id=request.user.id).count()
-
+	
         net_count = post.userUpVotes.count() - post.userDownVotes.count()
         que_dict = {
-            'posts': post,
+            'posts': tag_id,
             'user': request.user,
             'thisUserUpvote': thisuserupvote,
             'thisUserDownvote': thisuserdownvote,
             'net_count': net_count
         }
+        
+        
         return render_to_response('questions/question_page.html', que_dict, context)
 
     else:
@@ -153,7 +160,7 @@ def submit_reply(request, qid):
 		current_post = Post.objects.get(pk=qid)
 		reply_body = request.POST['post_answer']
 		upvotes = 0
-
+		
 		u = User.objects.get(username=request.user.username)
 		some_user = UserProfile.objects.get(user=u)
 
@@ -166,10 +173,13 @@ def submit_reply(request, qid):
 		thisuserupvote = current_post.userUpVotes.filter(id=request.user.id).count()
 		thisuserdownvote = current_post.userDownVotes.filter(id=request.user.id).count()
 		net_count = current_post.userUpVotes.count() - current_post.userDownVotes.count()
-
+		
+		tag_id = Post.objects.filter(title = current_post)
+		print "tag_id"
+		print tag_id
 		context_dict = {
 			'user': request.user,
-			'posts': current_post,
+			'posts': tag_id,
 			'post_replies': replies,
 			'thisUserUpvote': thisuserupvote,
 			'thisUserDownvote': thisuserdownvote,
@@ -236,6 +246,7 @@ def link_question(request, qid):
     print qid
    
     posts = Post.objects.get(pk=qid)
+    
     replies = Reply.objects.filter(title=posts)
 	
     thisuserupvote = posts.userUpVotes.filter(id=request.user.id).count()
@@ -244,14 +255,21 @@ def link_question(request, qid):
     net_count = posts.userUpVotes.count() - posts.userDownVotes.count()
     print "link_questions"
     print replies
-    print request.user.username
+   
     print posts
+    
+    
+    
+    tag_id = Post.objects.filter(title = posts)
+    
+    
+    print tag_id
     count = len(replies)
     #print replies.username
     #print replies.user
     context_dict = {
 	'user': request.user,
-	'posts': posts,
+	'posts': tag_id,
 	'post_replies': replies,
 	'thisUserUpvote': thisuserupvote,
 	'thisUserDownvote': thisuserdownvote,
@@ -303,10 +321,11 @@ def linktag(request, qid):
     context = RequestContext(request)
 
     cat = Category.objects.get(pk=qid)
+    #post_tags = gettags_by_title(posts)
     posts_date = Post.objects.filter(category=cat).order_by('-post_date')
     posts_views = Post.objects.filter(category=cat).order_by('-post_views')
     #post = Post.objects.get(tags=new_tag)
-
+    
     context_dict = {
         'mytag': cat,
         'posts_views': posts_views,
