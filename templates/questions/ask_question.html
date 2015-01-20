@@ -22,19 +22,19 @@ $(document).ready(function(){
 	}
    
      if (cat_name == "other"){
-       
+    
+        //document.getElementById("category").disabled=true;
      	document.getElementById("other_tags").style.display='';
      	$("#tags").prop("required", true);
      	
     
      }else{
         $("#tags").prop("required", false);
+        //document.getElementById("category").disabled=false;
      	document.getElementById("other_tags").style.display='none';
      	document.getElementById("tags").hide();
      	
      }
-     
-    
     });
     
 });
@@ -70,14 +70,14 @@ $(document).ready(function(){
         <tr>
             <td>
                 <label>
-                    <b>Select a Category</b>
+                    <b>Select Tags</b>
                 </label>
             </td>
 
             <td>
             	
-                <select class="form-control" name="category" id= "category" style="width: 610px;">
-                <option>--Please Select Tag--</option> 
+                <select class="form-control" name="category" id= "category" multiple="yes" style="width: 610px;">
+               
                 {% for i in catg %}
          	<option>{{ i.category }}</option>
          	{% endfor %}
@@ -90,7 +90,7 @@ $(document).ready(function(){
             <tr>
             <td>
                 <label>
-                    <b>Tags</b>
+                    <b>Other Tags</b>
                 </label>
             </td>
                 &nbsp;

@@ -5,7 +5,7 @@
 {% block body_block %}
 
     <!-- MODAL FOR ANSWERING QUESTION -->
-
+    <!-- Values getting from 'linkquestion' method of View.py-->
     <!-- Modal -->
     <div class="modal fade" id="addAnswer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
          xmlns="http://www.w3.org/1999/html">
@@ -24,21 +24,18 @@
         </div>
       </div>
     </div>
-
+     <!--  get  values from 'linkquestion' method of View.py-->
     <div class="container-fluid"  style="padding-top: 0.1cm; padding-bottom: 0.7cm;">
 	<div class="  col-md-8 col-md-offset-2" role="navigation">
-
+	
         <ul class="nav nav-tabs">
-         {% for p in posts %}
-         {% if forloop.counter < 2 %}
         
         <h4 style="text-align: left; font-size:20px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
-            {{ p.title }}
+            {{ posts.title }}
         </h4>
-        {% endif %}
-	{% endfor %}
+	
         </ul>
-
+	
         <table>
             <tbody>
                 <tr>
@@ -67,36 +64,26 @@
                     <!-- POST CELL -->
 
 <td style="padding-top: 0.3cm; padding-left: 0.3cm; width: 100%; vertical-align: top;" class="postcell" >
-			 {% for p in posts %}
-         		{% if forloop.counter < 2 %}
                         <div>
                             <div class="panel panel-info post-text">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title" style="font-size: 15px;">{{ p.body }}</h3>
+                                    <h3 class="panel-title" style="font-size: 15px;">{{ posts.body }}</h3>
                                 </div>
                             </div>
-			{% endif %}
-			{% endfor  %}	
-			
+
                             <div class="post-taglist" style="padding-top: 0.1cm;">
-                            {% for p in posts %}
+                            {% for c in cat %} 
                                 <a class="post-tag" rel="tag" title="" href="/questions/tags/">
-                                    {{ p.category|lower|capfirst }}
+                                    {{ c |lower|capfirst }}
                                 </a>
-                               {% endfor %}
-                              </div>
-                        
-                               {% for p in posts %}
-         		{% if forloop.counter < 2 %}
+                            {% endfor %}
 				<div style="float: right; " class="">
                                 asked by
                                 <a class="" rel="user-profile" title="Registered User" href="/aakashuser/view_profile/">
-                                   {{ p.creator.user.username }}
+                                   {{ posts.creator.user.username }}
                                 </a>
                             </div>
-                            {% endif %}
-			{% endfor  %}	
-                            
+                            </div>
                             
                         </div>
                     </td>
@@ -152,9 +139,8 @@
         <!-- ANSWER SECTION ENDS HERE -->
 
         <!-- SUBMIT REPLY FORM -->
-	{% for p in posts %}
-         {% if forloop.counter < 2 %}
-        <form id="post_answer_form" method="POST" action="/questions/submit_reply/{{ p.pk }}/">
+
+        <form id="post_answer_form" method="POST" action="/questions/submit_reply/{{ posts.pk }}/">
             {% csrf_token %}
             <h3 id="ans_header" style="display: none;padding-top: 11px; font-size: 18px">
                 Your Answer
@@ -164,8 +150,7 @@
             </div>
 
         </form>
-	 {% endif %}
-	{% endfor %}
+
         <!-- MODAL ALERT -->
 
         <!-- SMALL MODAL -->
@@ -186,12 +171,6 @@
         </div>-->
 
         <div id="ans_buttons" style="vertical-align: top; float: left;">
-        	
-        
-        <h4 style="text-align: left; font-size:20px; font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif; font-weight: bold; color:#2A6496">
-           
-        </h4>
-       
             {% if user.is_authenticated %}
             <button id="add_answer" title="Add Answer" class="btn btn btn-primary" type="button">Add your answer</button>
             {% else %}
@@ -299,7 +278,7 @@
         });
 
         $('div.vote img.vote-up').click(function() {
-
+	    
             var id = {{ posts.pk }};
             var vote_type = 'up';
 
